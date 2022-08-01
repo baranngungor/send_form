@@ -55,7 +55,7 @@ class SendForm extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final fieldData = fields[index];
                       switch (fieldData.fieldType) {
-                        case 'text':
+                        case FieldType.Text:
                           return Column(
                             children: [
                               TextFormField(
@@ -77,7 +77,7 @@ class SendForm extends StatelessWidget {
                                 buildSendButton(context)
                             ],
                           );
-                        case 'checkBox':
+                        case FieldType.Checkbox:
                           return Column(
                             children: [
                               CheckboxListTile(
@@ -91,7 +91,7 @@ class SendForm extends StatelessWidget {
                                 buildSendButton(context)
                             ],
                           );
-                        case 'dropDown':
+                        case FieldType.Dropdown:
                           return Column(
                             children: [
                               DropdownButtonFormField(

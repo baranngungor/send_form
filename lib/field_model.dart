@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
+enum FieldType { Text, Dropdown, Checkbox }
+
 class FieldModel {
-  String? variableName,
-      fieldType,
-      validatorErrorMessage,
-      checkBoxText,
-      fieldValue;
+  String? variableName, validatorErrorMessage, checkBoxText, fieldValue;
+  FieldType? fieldType;
   InputDecoration? textFieldStyle;
   TextEditingController? controller;
   TextInputAction? textInputAction;
