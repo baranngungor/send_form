@@ -1,39 +1,85 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+This package acts as a form builder.
+It allows the data to be received from the elements of the form to be sent via HTTP POST. You need to provide a URL for this.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+You need to create the elements of your form in a list of data model named Field Model.
+
+For form validation, you should create a GlobalKey and send it to SendForm.
+
+You can give 'text', 'checkBox' and 'dropDown' types to fieldType variable name in this form builder FieldModel.
+
+When using dropdown, you need to define a list of objects with 'text' and 'value' keys in the dropdownButtons variable. The text key represents the label of the dropdown element, and the value key represents the data to be sent to the URL in the POST operation.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
 ```dart
-const like = 'sample';
+GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController addressTitleController = TextEditingController();
+  TextEditingController addressDescriptionController = TextEditingController();
+  late List<FieldModel> fields = [
+    FieldModel(
+        fieldType: 'text',
+        variableName: 'addressTitle',
+        controller: addressTitleController,
+        textInputAction: TextInputAction.next,
+        validatorErrorMessage: 'Can\'t be empty.',
+        textFieldStyle: const InputDecoration(
+            labelText: 'Address Title', border: OutlineInputBorder())),
+    FieldModel(
+        fieldType: 'text',
+        variableName: 'addressDescription',
+        controller: addressDescriptionController,
+        textInputAction: TextInputAction.next,
+        validatorErrorMessage: 'Can\'t be empty.',
+        textFieldStyle: const InputDecoration(
+            labelText: 'Address Description', border: OutlineInputBorder())),
+    FieldModel(
+        fieldType: 'dropDown',
+        variableName: 'city',
+        textInputAction: TextInputAction.next,
+        validatorErrorMessage: 'Can\'t be empty.',
+        textFieldStyle: const InputDecoration(
+            labelText: 'City', border: OutlineInputBorder()),
+        dropdownButtons: [
+          {
+            'text': 'Istanbul',
+            'value': 'istanbul',
+          },
+          {
+            'text': 'London',
+            'value': 'london',
+          },
+          {
+            'text': 'Berlin',
+            'value': 'berlin',
+          },
+        ])
+  ];
+
+    @override
+  Widget build(BuildContext context) {
+    return SendForm(
+      formKey: formKey,
+      fields: fields,
+      sendFormTitle: 'Address Add',
+      sendFormButtonText: 'Save',
+      sendFormAppBarColor: Colors.green,
+      sendFormTitleStyle: const TextStyle(color: Colors.white),
+      sendFormButtonStyle: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.green),
+      sendFormButtonTextStyle: const TextStyle(color: Colors.white),
+      sendFormURL: 'YOUR URL',
+      errorTitle: 'Warning',
+      errorMessage: 'THIS MESSAGE WILL BE ERROR MODAL\'S CONTENT',
+      token: 'YOUR URL\'S HEADER TOKEN',
+      automaticallyImplyLeading: false,
+      appBarLeading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () => Navigator.pop(context)),
+    );
+  }
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
