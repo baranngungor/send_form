@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:send_form/model/dropdown_model.dart';
 
 enum FieldType { Text, Dropdown, Checkbox }
 
@@ -10,7 +11,7 @@ class FieldModel {
   TextInputAction? textInputAction;
   int? maxLines;
   bool? checkBoxValue;
-  List? dropdownButtons;
+  List<DropdownModel>? dropdownButtons;
 
   FieldModel(
       {required this.variableName,

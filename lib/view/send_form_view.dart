@@ -101,11 +101,11 @@ class SendForm extends StatelessWidget {
                                       fieldData.dropdownButtons!.length,
                                       (index) => DropdownMenuItem(
                                             value: fieldData
-                                                    .dropdownButtons![index]
-                                                ['value'],
+                                                .dropdownButtons![index].value,
                                             child: Text(fieldData
                                                     .dropdownButtons![index]
-                                                ['text']),
+                                                    .text ??
+                                                ''),
                                           )),
                                   validator: (value) {
                                     return value == null ||
