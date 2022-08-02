@@ -9,9 +9,9 @@ You need to create the elements of your form in a list of data model named Field
 
 For form validation, you should create a GlobalKey and send it to SendForm.
 
-You can give 'text', 'checkBox' and 'dropDown' types to fieldType variable name in this form builder FieldModel.
+You can give FieldType.Text, FieldType.Checkbox and FieldType.Dropdown types to fieldType variable name in this form builder FieldModel.
 
-When using dropdown, you need to define a list of objects with 'text' and 'value' keys in the dropdownButtons variable. The text key represents the label of the dropdown element, and the value key represents the data to be sent to the URL in the POST operation.
+When using dropdown, you need to define a list of DropdownModel with 'text' and 'value' keys in the dropdownButtons variable. The text key represents the label of the dropdown element, and the value key represents the data to be sent to the URL in the POST operation.
 
 ## Usage
 
@@ -21,7 +21,7 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController addressDescriptionController = TextEditingController();
   late List<FieldModel> fields = [
     FieldModel(
-        fieldType: 'text',
+        fieldType: FieldType.Text,
         variableName: 'addressTitle',
         controller: addressTitleController,
         textInputAction: TextInputAction.next,
@@ -29,7 +29,7 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
         textFieldStyle: const InputDecoration(
             labelText: 'Address Title', border: OutlineInputBorder())),
     FieldModel(
-        fieldType: 'text',
+        fieldType: FieldType.Text,
         variableName: 'addressDescription',
         controller: addressDescriptionController,
         textInputAction: TextInputAction.next,
@@ -37,25 +37,25 @@ GlobalKey<FormState> formKey = GlobalKey<FormState>();
         textFieldStyle: const InputDecoration(
             labelText: 'Address Description', border: OutlineInputBorder())),
     FieldModel(
-        fieldType: 'dropDown',
+        fieldType: FieldType.Dropdown,
         variableName: 'city',
         textInputAction: TextInputAction.next,
         validatorErrorMessage: 'Can\'t be empty.',
         textFieldStyle: const InputDecoration(
             labelText: 'City', border: OutlineInputBorder()),
         dropdownButtons: [
-          {
-            'text': 'Istanbul',
-            'value': 'istanbul',
-          },
-          {
-            'text': 'London',
-            'value': 'london',
-          },
-          {
-            'text': 'Berlin',
-            'value': 'berlin',
-          },
+          DropdownModel(
+            text: 'Istanbul',
+            value: 'istanbul',
+          ),
+          DropdownModel(
+            text: 'London',
+            value: 'london',
+          ),
+          DropdownModel(
+            text: 'Berlin',
+            value: 'berlin',
+          ),
         ])
   ];
 
